@@ -7,11 +7,6 @@ APP_PROCESS="python3 main.py"  # Nome do processo da aplicação que está rodan
 # Navegar para o diretório da aplicação
 cd "$APP_DIR" || exit 1
 
-# Adicionar as alterações ao Git
-git add .
-git commit -m "Atualizando a aplicação antes do deploy"
-git push origin main
-
 # Parar o processo da aplicação (se estiver em execução)
 APP_PID=$(pgrep -f "$APP_PROCESS")
 if [ -n "$APP_PID" ]; then
@@ -21,14 +16,18 @@ else
     echo "Nenhum processo em execução encontrado para $APP_PROCESS."
 fi
 
+# Adicionar as alterações ao Git
+git add .
+git commit -m "Teste da aplicação antes do deploy"
+git push origin main
+
 # Baixar as atualizações do repositório Git
 echo "Baixando a aplicação atualizada do repositório Git..."
 git pull origin main
 
-# Remover arquivos antigos, exceto o diretório .git
-echo "Removendo arquivos antigos..."
-find "$APP_DIR" -type f ! -path "$APP_DIR/.git/*" -exec rm -f {} \;
-find "$APP_DIR" -type d ! -path "$APP_DIR/.git" ! -path "$APP_DIR/.git/*" -empty -exec rmdir {} \;
+# Limpar arquivos não versionados e diretórios vazios com git clean
+echo "Removendo arquivos não versionados..."
+git clean -fdX   # Limpa arquivos não versionados e ignorados, preservando os rastreados
 
 # Iniciar a aplicação
 echo "Iniciando a aplicação..."
