@@ -1,1 +1,4 @@
-python3: can't open file '/home/lizics/DevOpsProject/DevOps-0986869-Lizie/main.py': [Errno 2] No such file or directory
+ * Serving Flask app 'main'
+ * Debug mode: on
+Address already in use
+Port 5000 is in use by another program. Either identify and stop that program, or start the server with a different port.

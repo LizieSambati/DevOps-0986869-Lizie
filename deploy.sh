@@ -18,7 +18,7 @@ fi
 
 # Adicionar as alterações ao Git
 git add .
-git commit -m "Teste da aplicação antes do deploy"
+git commit -m "Atualização automática do deploy"
 git push origin main
 
 # Baixar as atualizações do repositório Git
